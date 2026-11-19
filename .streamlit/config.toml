@@ -1,0 +1,49 @@
+# AspectPulse theme configuration. Hex values mirror ui/theme.py.
+# Native widgets (inputs, tables, tabs, uploaders, progress bars) inherit these tokens.
+
+[client]
+toolbarMode = "minimal"
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "dark"
+primaryColor = "#0EA5E9"
+backgroundColor = "#090D16"
+secondaryBackgroundColor = "#131F37"
+textColor = "#F8FAFC"
+linkColor = "#38BDF8"
+linkUnderline = false
+borderColor = "#1E293B"
+showWidgetBorder = true
+dataframeBorderColor = "#1E293B"
+dataframeHeaderBackgroundColor = "#0F172A"
+dataframeHeaderTextColor = "#94A3B8"
+codeBackgroundColor = "#0F172A"
+codeTextColor = "#7DD3FC"
+baseRadius = "7px"
+buttonRadius = "7px"
+baseFontSize = 14
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+codeFont = "JetBrains Mono:https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+codeFontSize = "0.8rem"
+headingFontSizes = ["1.55rem", "1.15rem", "1.02rem", "0.95rem", "0.875rem", "0.8125rem"]
+headingFontWeights = [650, 600, 600, 600, 600, 600]
+greenColor = "#10B981"
+redColor = "#F43F5E"
+yellowColor = "#F59E0B"
+orangeColor = "#F59E0B"
+blueColor = "#0EA5E9"
+violetColor = "#8B5CF6"
+grayColor = "#94A3B8"
+greenTextColor = "#6EE7B7"
+redTextColor = "#FDA4AF"
+yellowTextColor = "#FDE68A"
+blueTextColor = "#BAE6FD"
+grayTextColor = "#94A3B8"
+chartCategoricalColors = ["#0EA5E9", "#8B5CF6", "#10B981", "#F59E0B", "#F43F5E", "#06B6D4"]
+
+[theme.sidebar]
+backgroundColor = "#060911"
+secondaryBackgroundColor = "#0F172A"

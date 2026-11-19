@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+  <defs>
+    <linearGradient id="ap_bg" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="ap_glow" x1="6" y1="6" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="ap_blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+  </defs>
+  <!-- Background squircle -->
+  <rect width="36" height="36" rx="9" fill="#0F172A"/>
+  <rect x="0.5" y="0.5" width="35" height="35" rx="8.5" stroke="url(#ap_bg)" stroke-width="1.2" stroke-opacity="0.6"/>
+  <!-- Ambient glow ring -->
+  <circle cx="18" cy="18" r="10" fill="url(#ap_glow)" filter="url(#ap_blur)" opacity="0.4"/>
+  <!-- Pulse waveform & aspect nodes -->
+  <path d="M7 19.5L11.5 19.5L14.5 11L18 25L21.5 15.5L24.5 21L29 21" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Aspect crystal nodes -->
+  <circle cx="14.5" cy="11" r="2.2" fill="#38BDF8"/>
+  <circle cx="18" cy="25" r="2.2" fill="#818CF8"/>
+  <circle cx="21.5" cy="15.5" r="2" fill="#38BDF8"/>
+</svg>

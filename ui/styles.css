@@ -1,0 +1,938 @@
+/* AspectPulse stylesheet.
+   Design tokens are exposed as CSS variables via ui/theme.py (css_variables()).
+   Maintains standard .riq-* classes for architecture & test compatibility. */
+
+/* ---------------------------------------------------------------- base & layout */
+html, body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--riq-bg);
+}
+
+[data-testid="stMainBlockContainer"] {
+  max-width: 1360px;
+  padding-top: 2rem;
+  padding-bottom: 4.5rem;
+}
+
+[data-testid="stHeader"] {
+  background: transparent;
+}
+
+[data-testid="stAppDeployButton"] {
+  display: none;
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: -0.02em;
+  color: var(--riq-text);
+  font-weight: 650;
+}
+
+hr {
+  border: none !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, var(--riq-border) 0%, var(--riq-border-soft) 50%, transparent 100%) !important;
+  margin: 1.5rem 0 !important;
+}
+
+/* ---------------------------------------------------------------- buttons */
+[data-testid="stBaseButton-primary"] {
+  background: linear-gradient(135deg, var(--riq-accent) 0%, var(--riq-accent-hover) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 2px 10px rgba(14, 165, 233, 0.25);
+  color: #FFFFFF;
+  font-weight: 550;
+  border-radius: var(--riq-radius-md);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-testid="stBaseButton-primary"]:hover {
+  background: linear-gradient(135deg, #38BDF8 0%, var(--riq-accent) 100%);
+  border-color: rgba(56, 189, 248, 0.6);
+  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.4);
+  transform: translateY(-1px);
+  color: #FFFFFF;
+}
+
+[data-testid="stBaseButton-secondary"] {
+  background: var(--riq-surface);
+  border: 1px solid var(--riq-border);
+  color: var(--riq-text);
+  font-weight: 500;
+  border-radius: var(--riq-radius-md);
+  transition: all 0.2s ease;
+}
+
+[data-testid="stBaseButton-secondary"]:hover {
+  border-color: var(--riq-accent);
+  background: var(--riq-surface-2);
+  color: #FFFFFF;
+}
+
+[data-testid="stExpander"] details {
+  background: var(--riq-surface);
+  border: 1px solid var(--riq-border-soft);
+  border-radius: var(--riq-radius-md);
+  transition: border-color 0.2s ease;
+}
+
+[data-testid="stExpander"] details:hover {
+  border-color: var(--riq-border);
+}
+
+[data-testid="stExpander"] summary {
+  font-weight: 550;
+  color: var(--riq-text);
+}
+
+[data-testid="stFileUploaderDropzone"] {
+  background: var(--riq-surface);
+  border: 1.5px dashed var(--riq-border);
+  border-radius: var(--riq-radius-lg);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+[data-testid="stFileUploaderDropzone"]:hover {
+  border-color: var(--riq-accent);
+  background: var(--riq-surface-2);
+}
+
+/* ---------------------------------------------------------------- sidebar */
+[data-testid="stSidebar"] {
+  border-right: 1px solid var(--riq-border-soft);
+}
+
+[data-testid="stSidebarNavLink"] {
+  border-radius: var(--riq-radius-md);
+  margin: 2px 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+[data-testid="stSidebarNavLink"]:hover {
+  background: var(--riq-surface-2);
+}
+
+[data-testid="stSidebarNavLink"] span {
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.riq-side-status {
+  padding: 12px 14px;
+  background: var(--riq-surface);
+  border: 1px solid var(--riq-border-soft);
+  border-radius: var(--riq-radius-md);
+  margin-bottom: 12px;
+}
+
+[data-testid="stLogo"] {
+  height: 2.6rem;
+  max-width: 100%;
+}
+
+.riq-side-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--riq-accent);
+  margin-bottom: 8px;
+}
+
+.riq-side-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--riq-text);
+  margin: 5px 0;
+}
+
+.riq-side-row .riq-side-sub {
+  color: var(--riq-muted);
+  font-size: 11.5px;
+  margin-left: auto;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 60%;
+}
+
+.riq-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.riq-dot.on {
+  background: var(--riq-positive);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2), 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.riq-dot.off {
+  background: var(--riq-mixed);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+.riq-side-note {
+  font-size: 11.5px;
+  color: var(--riq-muted);
+  line-height: 1.5;
+  margin-top: 6px;
+}
+
+/* ---------------------------------------------------------------- page header */
+.riq-subtitle {
+  color: var(--riq-text-2);
+  font-size: 14.5px;
+  line-height: 1.5;
+  margin: -0.4rem 0 0.35rem 0;
+}
+
+.riq-header-meta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 0.4rem;
+}
+
+/* ---------------------------------------------------------------- badges & chips */
+.riq-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--riq-radius-pill);
+  font-size: 11.5px;
+  font-weight: 550;
+  line-height: 1.5;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.riq-badge .riq-dot {
+  width: 6px;
+  height: 6px;
+  box-shadow: none;
+}
+
+.riq-tone-accent {
+  color: #38BDF8;
+  background: rgba(14, 165, 233, 0.12);
+  border-color: rgba(56, 189, 248, 0.28);
+}
+
+.riq-tone-positive {
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.28);
+}
+
+.riq-tone-negative {
+  color: #FB7185;
+  background: rgba(244, 63, 94, 0.12);
+  border-color: rgba(244, 63, 94, 0.28);
+}
+
+.riq-tone-neutral {
+  color: #94A3B8;
+  background: rgba(148, 163, 184, 0.10);
+  border-color: rgba(148, 163, 184, 0.20);
+}
+
+.riq-tone-mixed, .riq-tone-warning {
+  color: #FBBF24;
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.28);
+}
+
+.riq-chip {
+  display: inline-block;
+  padding: 2px 9px;
+  margin: 2px 4px 2px 0;
+  border-radius: var(--riq-radius-sm);
+  font-size: 11.5px;
+  font-weight: 500;
+  background: var(--riq-surface-2);
+  border: 1px solid var(--riq-border);
+  color: var(--riq-text-2);
+}
+
+/* ---------------------------------------------------------------- KPI cards */
+.riq-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  margin: 0.35rem 0 1.25rem 0;
+}
+
+.riq-kpi {
+  background: linear-gradient(180deg, var(--riq-surface) 0%, rgba(15, 23, 42, 0.85) 100%);
+  border: 1px solid var(--riq-border);
+  border-radius: var(--riq-radius-lg);
+  padding: 16px 18px 14px;
+  min-height: 108px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.riq-kpi:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.45), 0 0 12px rgba(14, 165, 233, 0.1);
+}
+
+.riq-kpi::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--riq-accent), transparent);
+  opacity: 0.6;
+}
+
+.riq-kpi.riq-positive::before {
+  background: linear-gradient(90deg, transparent, var(--riq-positive), transparent);
+  opacity: 0.8;
+}
+
+.riq-kpi.riq-negative::before {
+  background: linear-gradient(90deg, transparent, var(--riq-negative), transparent);
+  opacity: 0.8;
+}
+
+.riq-kpi.riq-mixed::before {
+  background: linear-gradient(90deg, transparent, var(--riq-mixed), transparent);
+  opacity: 0.8;
+}
+
+.riq-kpi-label {
+  font-size: 12px;
+  font-weight: 550;
+  color: var(--riq-text-2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.01em;
+}
+
+.riq-kpi-value {
+  font-size: 27px;
+  font-weight: 700;
+  color: var(--riq-text);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.riq-kpi-value.riq-muted {
+  color: var(--riq-muted);
+}
+
+.riq-kpi-caption {
+  font-size: 11.5px;
+  color: var(--riq-muted);
+  margin-top: auto;
+  padding-top: 6px;
+  line-height: 1.4;
+}
+
+.riq-kpi.riq-accent {
+  border-top: 2px solid var(--riq-accent);
+}
+
+.riq-kpi.riq-positive .riq-kpi-value {
+  color: var(--riq-positive);
+}
+
+.riq-kpi.riq-negative .riq-kpi-value {
+  color: var(--riq-negative);
+}
+
+.riq-kpi.riq-mixed .riq-kpi-value {
+  color: var(--riq-mixed);
+}
+
+/* ---------------------------------------------------------------- sections & panels */
+.riq-section {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 1.8rem 0 0.75rem 0;
+  padding-bottom: 4px;
+}
+
+.riq-section-title {
+  font-size: 16px;
+  font-weight: 650;
+  color: var(--riq-text);
+  letter-spacing: -0.01em;
+}
+
+.riq-section-caption {
+  font-size: 12.5px;
+  color: var(--riq-muted);
+}
+
+.riq-panel-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--riq-text);
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.riq-panel-caption {
+  font-size: 12px;
+  color: var(--riq-muted);
+  margin-bottom: 8px;
+  line-height: 1.45;
+}
+
+/* ---------------------------------------------------------------- callouts */
+.riq-callout {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 14px;
+  border-radius: var(--riq-radius-md);
+  font-size: 13px;
+  line-height: 1.55;
+  border: 1px solid var(--riq-border-soft);
+  background: var(--riq-surface);
+  color: var(--riq-text-2);
+  margin: 0.35rem 0 0.85rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.riq-callout b, .riq-callout strong {
+  color: var(--riq-text);
+  font-weight: 600;
+}
+
+.riq-callout code {
+  font-size: 12px;
+  background: var(--riq-surface-2);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.riq-callout .riq-callout-tag {
+  flex: none;
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--riq-radius-sm);
+  margin-top: 1px;
+}
+
+.riq-callout.riq-tone-warning, .riq-callout.riq-tone-mixed {
+  border-color: rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.06);
+  color: var(--riq-text-2);
+}
+
+.riq-callout.riq-tone-negative {
+  border-color: rgba(244, 63, 94, 0.3);
+  background: rgba(244, 63, 94, 0.07);
+  color: var(--riq-text-2);
+}
+
+.riq-callout.riq-tone-accent {
+  border-color: rgba(14, 165, 233, 0.3);
+  background: rgba(14, 165, 233, 0.07);
+  color: var(--riq-text-2);
+}
+
+.riq-callout.riq-tone-positive {
+  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.06);
+  color: var(--riq-text-2);
+}
+
+.riq-tone-warning .riq-callout-tag {
+  background: rgba(245, 158, 11, 0.18);
+  color: #FBBF24;
+}
+
+.riq-tone-negative .riq-callout-tag {
+  background: rgba(244, 63, 94, 0.18);
+  color: #FB7185;
+}
+
+.riq-tone-accent .riq-callout-tag {
+  background: rgba(14, 165, 233, 0.18);
+  color: #38BDF8;
+}
+
+.riq-tone-positive .riq-callout-tag {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34D399;
+}
+
+.riq-tone-neutral .riq-callout-tag {
+  background: rgba(148, 163, 184, 0.16);
+  color: var(--riq-neutral);
+}
+
+/* ---------------------------------------------------------------- empty state */
+.riq-empty {
+  border: 1.5px dashed var(--riq-border);
+  border-radius: var(--riq-radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  margin: 0.6rem 0 1.2rem 0;
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.riq-empty-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 12px;
+  border-radius: var(--riq-radius-md);
+  background: var(--riq-surface-2);
+  border: 1px solid var(--riq-border-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--riq-accent);
+}
+
+.riq-empty-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--riq-text);
+}
+
+.riq-empty-body {
+  font-size: 12.5px;
+  color: var(--riq-muted);
+  margin-top: 6px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.55;
+}
+
+/* ---------------------------------------------------------------- ranked bars & key-value lists */
+.riq-rank {
+  display: grid;
+  grid-template-columns: minmax(90px, 38%) 1fr 44px;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+  font-size: 12.5px;
+}
+
+.riq-rank-label {
+  color: var(--riq-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.riq-rank-track {
+  height: 7px;
+  background: var(--riq-surface-2);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--riq-border-soft);
+}
+
+.riq-rank-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.riq-rank-value {
+  text-align: right;
+  color: var(--riq-text-2);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.riq-kv {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 16px;
+  font-size: 12.5px;
+  margin: 0;
+}
+
+.riq-kv .k {
+  color: var(--riq-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.riq-kv .v {
+  color: var(--riq-text);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+  font-weight: 500;
+}
+
+.riq-activity {
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--riq-border-soft);
+  font-size: 12.5px;
+}
+
+.riq-activity:last-child {
+  border-bottom: none;
+}
+
+.riq-activity .riq-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--riq-accent);
+  box-shadow: 0 0 6px rgba(14, 165, 233, 0.4);
+}
+
+.riq-activity-main {
+  color: var(--riq-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.riq-activity-main span {
+  color: var(--riq-muted);
+}
+
+.riq-activity-time {
+  color: var(--riq-muted);
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- review & quote blocks */
+.riq-review {
+  background: var(--riq-surface);
+  border: 1px solid var(--riq-border-soft);
+  border-left: 3px solid var(--riq-accent);
+  border-radius: var(--riq-radius-md);
+  padding: 15px 18px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--riq-text);
+  white-space: pre-wrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.riq-review-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 12px;
+  color: var(--riq-muted);
+  margin: 0 0 8px 0;
+}
+
+.riq-review-meta b {
+  color: var(--riq-text-2);
+  font-weight: 500;
+}
+
+.riq-quote {
+  border-left: 2px solid var(--riq-border);
+  padding: 4px 0 4px 14px;
+  margin: 8px 0;
+  font-size: 13px;
+  color: var(--riq-text);
+  line-height: 1.55;
+  background: rgba(15, 23, 42, 0.3);
+  border-radius: 0 var(--riq-radius-sm) var(--riq-radius-sm) 0;
+}
+
+.riq-quote.pos {
+  border-left-color: var(--riq-positive);
+}
+
+.riq-quote.neg {
+  border-left-color: var(--riq-negative);
+}
+
+.riq-quote .riq-quote-meta {
+  display: block;
+  font-size: 11.5px;
+  color: var(--riq-muted);
+  margin-top: 2px;
+}
+
+/* ---------------------------------------------------------------- strategy cards */
+.riq-strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 14px;
+  margin: 0.35rem 0 1.25rem;
+}
+
+.riq-strategy {
+  background: linear-gradient(180deg, var(--riq-surface) 0%, rgba(15, 23, 42, 0.9) 100%);
+  border: 1px solid var(--riq-border);
+  border-radius: var(--riq-radius-lg);
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+
+.riq-strategy:hover {
+  transform: translateY(-2px);
+}
+
+.riq-strategy::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 3px;
+  background: var(--riq-strategy-color, var(--riq-accent));
+}
+
+.riq-strategy.riq-best {
+  border-color: rgba(14, 165, 233, 0.5);
+  box-shadow: 0 6px 20px -2px rgba(14, 165, 233, 0.15);
+}
+
+.riq-strategy-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.riq-strategy-name {
+  font-size: 14.5px;
+  font-weight: 650;
+  color: var(--riq-text);
+}
+
+.riq-strategy-primary {
+  margin: 14px 0 2px;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--riq-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.riq-strategy-primary.riq-muted {
+  color: var(--riq-muted);
+  font-size: 22px;
+}
+
+.riq-strategy-primary-label {
+  font-size: 11px;
+  color: var(--riq-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 650;
+}
+
+.riq-strategy .riq-kv {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--riq-border-soft);
+}
+
+/* ---------------------------------------------------------------- scores */
+.riq-score {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.riq-score span {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--riq-surface-2);
+}
+
+.riq-score span.on {
+  background: var(--riq-accent);
+}
+
+.riq-score.good span.on {
+  background: var(--riq-positive);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+}
+
+.riq-score.mid span.on {
+  background: var(--riq-mixed);
+}
+
+.riq-score.bad span.on {
+  background: var(--riq-negative);
+}
+
+.riq-dim {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--riq-border-soft);
+}
+
+.riq-dim:last-child {
+  border-bottom: none;
+}
+
+.riq-dim-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--riq-text);
+}
+
+.riq-dim-body {
+  font-size: 12.5px;
+  color: var(--riq-text-2);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------------- annotation queue */
+.riq-queue {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  margin: 5px 0 3px;
+}
+
+.riq-queue span {
+  min-width: 27px;
+  height: 23px;
+  padding: 0 4px;
+  border-radius: var(--riq-radius-sm);
+  font-size: 10.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--riq-surface);
+  border: 1px solid var(--riq-border-soft);
+  color: var(--riq-muted);
+  font-variant-numeric: tabular-nums;
+  transition: all 0.15s ease;
+}
+
+.riq-queue span.done {
+  color: var(--riq-positive);
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.riq-queue span.flag {
+  color: var(--riq-mixed);
+  border-color: rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.riq-queue span.cur {
+  background: linear-gradient(135deg, var(--riq-accent) 0%, var(--riq-accent-hover) 100%);
+  border-color: var(--riq-accent);
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.4);
+}
+
+/* ---------------------------------------------------------------- summary blocks */
+.riq-summary-opinion {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--riq-text);
+}
+
+.riq-list {
+  margin: 4px 0 0 0;
+  padding-left: 20px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--riq-text);
+}
+
+.riq-list li {
+  margin: 4px 0;
+}
+
+.riq-list-title {
+  font-size: 11.5px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--riq-accent);
+  margin-top: 8px;
+}
+
+/* ---------------------------------------------------------------- responsive */
+@media (max-width: 760px) {
+  [data-testid="stMainBlockContainer"] {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1.5rem;
+  }
+  .riq-header-meta {
+    justify-content: flex-start;
+  }
+  .riq-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .riq-kpi-value {
+    font-size: 22px;
+  }
+  .riq-rank {
+    grid-template-columns: minmax(80px, 40%) 1fr 36px;
+  }
+}
+
+/* ---------------------------------------------------------------- icons */
+.riq-icon {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-feature-settings: 'liga';
+  vertical-align: middle;
+}
+
+.riq-kpi-label .riq-icon {
+  color: var(--riq-muted);
+  margin-left: auto;
+}
